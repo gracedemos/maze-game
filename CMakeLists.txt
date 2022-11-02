@@ -1,9 +1,10 @@
 project(maze-game)
 
 if(APPLE)
-    include_directories(/usr/local/include/SDL2)
-    add_executable(${PROJECT_NAME} src/main.cpp)
+    include_directories(/usr/local/include/SDL2 ${CMAKE_SOURCE_DIR}/include)
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE src/main.cpp src/game.cpp src/map.cpp)
     target_link_libraries(${PROJECT_NAME} /usr/local/lib/libSDL2.dylib)
+    set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "Maze Game")
 endif()
 
 if(WIN32)
