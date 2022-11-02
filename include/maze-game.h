@@ -1,5 +1,8 @@
 #include <SDL.h>
 #include <vector>
+#include <string>
+#include <fstream>
+#include <iostream>
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600

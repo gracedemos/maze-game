@@ -5,6 +5,8 @@ if(APPLE)
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE src/main.cpp src/game.cpp src/map.cpp)
     target_link_libraries(${PROJECT_NAME} /usr/local/lib/libSDL2.dylib)
     set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "Maze Game")
+    
+    add_custom_target(levels ALL COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources "${CMAKE_BINARY_DIR}/Maze Game.app/Contents/MacOS/resources")
 endif()
 
 if(WIN32)

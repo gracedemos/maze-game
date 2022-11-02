@@ -14,9 +14,7 @@ void Game::initSDL() {
 
     SDL_RenderSetLogicalSize(renderer, RENDER_WIDTH, RENDER_HEIGHT);
 
-    std::vector<int> layout(RENDER_WIDTH * RENDER_HEIGHT);
-    layout[0] = MAP_PLAYER;
-    layout[40] = MAP_WALL;
+    std::vector<int> layout = openLayout("resources/level-1.bin");
 
     map = new Map(layout);
 
@@ -31,6 +29,21 @@ void Game::mainLoop() {
         quit = handleEvent(&e);
         render();
     }
+}
+
+std::vector<int> Game::openLayout(std::string path) {
+    std::vector<char> buffer(768);
+
+    std::ifstream file(path.c_str(), std::ios::binary);
+
+    file.read(buffer.data(), 768);
+    file.close();
+    std::vector<int> layout(buffer.size());
+
+    for(int i = 0; i < buffer.size(); i++) {
+        layout[i] = buffer[i];
+    }
+    return layout;
 }
 
 void Game::render() {

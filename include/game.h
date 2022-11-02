@@ -18,6 +18,7 @@ class Game {
 
     void initSDL();
     void mainLoop();
+    std::vector<int> openLayout(std::string file);
     void render();
     bool handleEvent(SDL_Event* e);
     void cleanup();
