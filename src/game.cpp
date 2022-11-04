@@ -1,4 +1,5 @@
 #include <game.h>
+#include <iostream>
 
 void Game::run() {
     initSDL();
@@ -14,7 +15,7 @@ void Game::initSDL() {
 
     SDL_RenderSetLogicalSize(renderer, RENDER_WIDTH, RENDER_HEIGHT);
 
-    std::vector<int> layout = openLayout("resources/level-1.bin");
+    std::vector<int> layout = openLayout(getResourcesPath());
 
     map = new Map(layout);
 
@@ -29,6 +30,16 @@ void Game::mainLoop() {
         quit = handleEvent(&e);
         render();
     }
+}
+
+std::string Game::getResourcesPath() {
+    #ifdef __APPLE__
+        char path[1024];
+        uint32_t size = sizeof(path);
+        _NSGetExecutablePath(path, &size);
+        std::string ret(path);
+        return ret.substr(0, ret.size() - 10) + "/resources/level-1.bin";
+    #endif
 }
 
 std::vector<int> Game::openLayout(std::string path) {
