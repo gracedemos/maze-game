@@ -1,5 +1,4 @@
 #include <game.h>
-#include <iostream>
 
 void Game::run() {
     initSDL();
@@ -39,6 +38,8 @@ std::string Game::getResourcesPath() {
         _NSGetExecutablePath(path, &size);
         std::string ret(path);
         return ret.substr(0, ret.size() - 10) + "/resources/level-1.bin";
+    #elif _WIN64
+        return std::string("resources/level-1.bin");
     #endif
 }
 
