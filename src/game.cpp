@@ -14,11 +14,16 @@ void Game::initSDL() {
 
     SDL_RenderSetLogicalSize(renderer, RENDER_WIDTH, RENDER_HEIGHT);
 
-    std::vector<int> layout = openLayout(getResourcesPath());
+    loadLevel(1);
+}
 
+void Game::loadLevel(int num) {
+    SDL_DestroyTexture(texture);
+    
+    std::vector<int> layout = openLayout(getResourcesPath() + "/level-" + std::to_string(num) + ".bin");
     map = new Map(layout);
-
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, RENDER_WIDTH, RENDER_HEIGHT);
+    currentLevel = num;
 }
 
 void Game::mainLoop() {
@@ -26,6 +31,13 @@ void Game::mainLoop() {
     SDL_Event e;
     
     while(!quit) {
+        if(map->isAtGoal()) {
+            loadLevel(currentLevel + 1);
+        }
+        if(map->isAtDeath()) {
+            loadLevel(1);
+        }
+
         quit = handleEvent(&e);
         render();
     }
@@ -37,9 +49,9 @@ std::string Game::getResourcesPath() {
         uint32_t size = sizeof(path);
         _NSGetExecutablePath(path, &size);
         std::string ret(path);
-        return ret.substr(0, ret.size() - 10) + "/resources/level-1.bin";
+        return ret.substr(0, ret.size() - 10) + "/resources";
     #elif _WIN64
-        return std::string("resources/level-1.bin");
+        return std::string("resources");
     #endif
 }
 

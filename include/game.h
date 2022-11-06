@@ -9,9 +9,11 @@ class Game {
     SDL_Renderer* renderer;
     Map* map;
     SDL_Texture* texture;
+    int currentLevel;
 
     void initSDL();
     void mainLoop();
+    void loadLevel(int num);
     std::vector<int> openLayout(std::string file);
     std::string getResourcesPath();
     void render();

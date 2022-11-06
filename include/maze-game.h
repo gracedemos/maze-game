@@ -24,7 +24,9 @@
 enum MapElement {
     MAP_EMPTY,
     MAP_PLAYER,
-    MAP_WALL
+    MAP_WALL,
+    MAP_GOAL,
+    MAP_DEATH
 };
 
 enum MoveDirection {
@@ -32,4 +34,9 @@ enum MoveDirection {
     MOVE_LEFT,
     MOVE_UP,
     MOVE_DOWN
+};
+
+enum CollisionTypes {
+    COLLISION_NONE,
+    COLLISION_WALL,
 };
