@@ -6,7 +6,7 @@ if(APPLE)
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE src/main.cpp src/game.cpp src/map.cpp)
     add_custom_target(levels ALL COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources "${CMAKE_BINARY_DIR}/Maze Game.app/Contents/MacOS/resources")
 
-    target_link_libraries(${PROJECT_NAME} /usr/local/lib/libSDL2.a /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/lib/libiconv.tbd "-framework Cocoa -framework IOKit -framework CoreAudio -framework AudioToolbox -framework ForceFeedback -framework GameController -framework CoreHaptics -framework Metal -framework Carbon -framework CoreVideo")
+    target_link_libraries(${PROJECT_NAME} /usr/local/lib/libSDL2.dylib)
     set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "Maze Game")
 endif()
 
