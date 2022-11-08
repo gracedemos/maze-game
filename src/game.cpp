@@ -52,6 +52,10 @@ std::string Game::getResourcesPath() {
         return ret.substr(0, ret.size() - 10) + "/resources";
     #elif _WIN64
         return std::string("resources");
+    #elif linux
+        char path[1024];
+        readlink("/proc/self/exe", path, 1024);
+        return std::string(dirname(path)) + "/resources";
     #endif
 }
 

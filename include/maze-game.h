@@ -6,6 +6,9 @@
 
 #ifdef __APPLE__
     #include <mach-o/dyld.h>
+#elif linux
+    #include <libgen.h>
+    #include <unistd.h>
 #endif
 
 #define WINDOW_WIDTH 800
@@ -16,6 +19,8 @@
 #ifdef __APPLE__
     #define WINDOW_FLAGS SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI
 #elif _WIN64
+    #define WINDOW_FLAGS SDL_WINDOW_SHOWN
+#elif linux
     #define WINDOW_FLAGS SDL_WINDOW_SHOWN
 #endif
 
