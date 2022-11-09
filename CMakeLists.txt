@@ -1,12 +1,13 @@
 project(maze-game)
 
 if(APPLE)
-    include_directories(/usr/local/include ${CMAKE_SOURCE_DIR}/include)
+    find_package(SDL2 REQUIRED)
+    include_directories(${SDL2_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE src/main.cpp src/game.cpp src/map.cpp)
     add_custom_target(levels ALL COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources "${CMAKE_BINARY_DIR}/Maze Game.app/Contents/MacOS/resources")
 
-    target_link_libraries(${PROJECT_NAME} /usr/local/lib/libSDL2.dylib)
+    target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
     set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "Maze Game")
 endif()
 
@@ -22,10 +23,11 @@ if(WIN32)
 endif()
 
 if(UNIX AND NOT APPLE)
-    include_directories(/usr/local/include ${CMAKE_SOURCE_DIR}/include)
+    find_package(SDL2 REQUIRED)
+    include_directories(${SDL2_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 
     add_executable(${PROJECT_NAME} src/main.cpp src/game.cpp src/map.cpp)
     add_custom_target(levels ALL COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ${CMAKE_BINARY_DIR}/resources)
 
-    target_link_libraries(${PROJECT_NAME} /usr/local/lib/libSDL2.so)
+    target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 endif()
