@@ -14,6 +14,7 @@ void Game::initSDL() {
 
     SDL_RenderSetLogicalSize(renderer, RENDER_WIDTH, RENDER_HEIGHT);
 
+    texture = nullptr;
     loadLevel(1);
 }
 

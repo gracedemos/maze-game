@@ -1,2 +1,9 @@
 # build
 /build
+
+# VSCode
+/.vscode
+
+# SDL2
+/lib
+include/SDL2
