@@ -1,5 +1,7 @@
 project(maze-game)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 if(APPLE)
     find_package(SDL2 REQUIRED)
     include_directories(${SDL2_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
@@ -31,3 +33,4 @@ if(UNIX AND NOT APPLE)
 
     target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 endif()
+
